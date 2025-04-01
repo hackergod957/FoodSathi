@@ -1,5 +1,5 @@
 import SplashScreen from "@/components/SplashScreen";// this is the splash component
-import { useNavigation } from "expo-router";//this is the navigation component
+import { router, useNavigation, useRouter } from "expo-router";//this is the navigation component
 import { useEffect, useRef, useState } from "react";//use components
 import { Animated, Easing, Text, View } from "react-native";// native components
 // Here i have imported all the complements and items
@@ -11,6 +11,7 @@ export default function Index() {
   const opacity = useRef(new Animated.Value(1)).current;//animated.value returns a object variable which can be change smoothly overtime and be linked to animated.timing,view
 
   const Navigation = useNavigation();// initializes navbar component
+  const router = useRouter()//for navigation
 
   useEffect(() => {
     //to hide the tabbar when the splash screen is true
@@ -28,6 +29,7 @@ export default function Index() {
           useNativeDriver: true,// so that the code runs on ui thread
         }).start(() => {
           setSplashScreen(false);
+          router.replace('/(auth)/login')
         });
         return () => {
           clearTimeout(fadeOut);// to avoid memory issue
@@ -44,9 +46,9 @@ export default function Index() {
           <SplashScreen />
         </Animated.View>
       ) : (
-        <View className="flex-1 ">
-          <View className="w-full h-full bg-black"></View>
-        </View>
+        <>
+
+        </>
       )}
     </>
 
