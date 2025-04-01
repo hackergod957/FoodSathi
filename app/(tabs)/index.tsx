@@ -1,21 +1,54 @@
-import SplashScreen from "@/components/SplashScreen";
-import { useNavigation } from "expo-router";
-import { useEffect, useState } from "react";
-import { Text, View } from "react-native";
-export default function Index() {
-  const [splashScreen, setSplashScreen] = useState<boolean>(true);
-  const Navigation = useNavigation();
-  useEffect(() => {
-    Navigation.setOptions({
-      tabBarStyle: {display: splashScreen ? 'none' : 'flat'}
-    })
-    const result = setTimeout(() => {
-      setSplashScreen(false);
-    }, 3000);
-    return () => {
-      clearTimeout(result);
-    };
-  },[splashScreen,Navigation]);
+import SplashScreen from "@/components/SplashScreen";// this is the splash component
+import { useNavigation } from "expo-router";//this is the navigation component
+import { useEffect, useRef, useState } from "react";//use components
+import { Animated, Easing, Text, View } from "react-native";// native components
+// Here i have imported all the complements and items
 
-  return <>{splashScreen ? <SplashScreen /> : <View></View>}</>;
+export default function Index() {
+  //variables for showing screen 
+  const [splashScreen, setSplashScreen] = useState<boolean>(true);
+  //here for animation useRef is used so that the screen doesn't rerenders every time and animation runs smoothly
+  const opacity = useRef(new Animated.Value(1)).current;//animated.value returns a object variable which can be change smoothly overtime and be linked to animated.timing,view
+
+  const Navigation = useNavigation();// initializes navbar component
+
+  useEffect(() => {
+    //to hide the tabbar when the splash screen is true
+    Navigation.setOptions({
+      tabBarStyle: { display: splashScreen ? "none" : "flat" },//hides bar if true
+    });
+
+    if (splashScreen) {
+      //waits for 2 seconds then displays fade out animation
+      const fadeOut = setTimeout(() => {
+        Animated.timing(opacity, {
+          toValue: 0,//final wanted value
+          duration: 1000,//runtime seconds
+          easing: Easing.ease,// so that it runs fast and goes slow
+          useNativeDriver: true,// so that the code runs on ui thread
+        }).start(() => {
+          setSplashScreen(false);
+        });
+        return () => {
+          clearTimeout(fadeOut);// to avoid memory issue
+        };
+      }, 2000);
+    }
+  }, [splashScreen, Navigation, opacity]);
+
+  return (
+    <>
+      {splashScreen ? (
+        <Animated.View style={{ flex: 1, opacity }}> 
+        {/* since the variable name and style key is same we can write shorthand opacity but for other we need to write opacity: variable */}
+          <SplashScreen />
+        </Animated.View>
+      ) : (
+        <View className="flex-1 ">
+          <View className="w-full h-full bg-black"></View>
+        </View>
+      )}
+    </>
+
+  );
 }
