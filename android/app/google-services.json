@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "39468054230",
+    "project_id": "foodsathi-827f7",
+    "storage_bucket": "foodsathi-827f7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:39468054230:android:cd328a1bcfb665cdc23b77",
+        "android_client_info": {
+          "package_name": "com.prinjal22.FoodSathi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "39468054230-md00hek4mkk8e8lsoovcpkj82nr2tf44.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.prinjal22.FoodSathi",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "39468054230-pajilidk7fr8pbsjrsurp6f8ilogkveb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAh7ySI4ZvatzAJkDJ0pk38prab8qpR0N8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "39468054230-pajilidk7fr8pbsjrsurp6f8ilogkveb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
