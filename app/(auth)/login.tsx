@@ -32,7 +32,7 @@ const Login = () => {
 
   GoogleSignin.configure({
     webClientId:
-      "893906370461-4okmh1rtope0ha0lnmel78q8nnb65tao.apps.googleusercontent.com", // Replace with the correct client_id for client_type: 1
+      "893906370461-4okmh1rtope0ha0lnmel78q8nnb65tao.apps.googleusercontent.com", 
   });
 
   function onAuthStateChanged(user) {
@@ -47,17 +47,23 @@ const Login = () => {
 
   const onGoogleButtonPress = async () => {
     try {
-      const { idToken } = await GoogleSignin.signIn();
-      console.log("ID Token:", idToken);
-
-      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      const { data } = await GoogleSignin.signIn();
+      console.log("ID Token:", data);
+      const idToken = data?.idToken;
+      const googleCredential = auth.GoogleAuthProvider.credential(
+        idToken ?? null
+      );
       const userCredential = await auth().signInWithCredential(
         googleCredential
       );
 
       console.log("User signed in:", userCredential.user);
     } catch (error) {
-      console.error("Error during sign-in:", error.code, error.message, error);
+      if (error instanceof Error) {
+        console.error("Error during sign-in:", error.message);
+      } else {
+        console.error("Error during sign-in:", error);
+      }
     }
   };
 

@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "893906370461-nd4ogjdjsi5f017khi3buv06ej5c4dld.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.prinjal22.FoodSathi",
+            "certificate_hash": "c0edc683db3d9b27244e257dacbf51cd511fccd6"
+          }
+        },
+        {
           "client_id": "893906370461-4okmh1rtope0ha0lnmel78q8nnb65tao.apps.googleusercontent.com",
           "client_type": 3
         }
